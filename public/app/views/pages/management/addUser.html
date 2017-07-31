@@ -1,0 +1,34 @@
+<div class="page-header">
+    <h1>User Add New</h1>
+</div>
+
+
+<form ng-submit="addUser.addRegUser(addRegData);">
+    <!-- email -->
+    <label>Email :</label>
+    <input class="form-control" type="text" name="email" placeholder="please enter email" ng-model="addUser.addRegUser.email">
+    <br>
+    <!-- username -->
+    <label>Username :</label>
+    <input class="form-control" type="text" name="username" placeholder="please enter username" ng-model="addUser.addRegUser.username">
+    <br>
+    <!-- password -->
+    <label>Password :</label>
+    <input class="form-control" type="password" name="password" placeholder="please enter password" ng-model="addUser.addRegUser.password">
+    <br>
+    <button class="btn btn-primary" type="submit">Add User</button>
+</form>
+
+<br>
+
+<div class="jumbotron text-center" ng-show="addUser.loading">
+    <span class="glyphicon glyphicon-repeat spinner"></span>
+    <p>Loading.....</p>
+</div>
+<div class="row show-hide-message" ng-show="addUser.successMsg">
+    <div class="alert alert-success">{{ addUser.successMsg }}</div>
+</div>
+<br>
+<div class="row show-hide-message" ng-show="addUser.errorMsg">
+    <div class="alert alert-danger">{{ addUser.errorMsg}}</div>
+</div>
