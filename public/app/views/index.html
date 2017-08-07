@@ -9,6 +9,13 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+    <!-- Cascade Style Sheets -->
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/animate.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/theme.css"/>
+    <link themer-link>
+
     <!-- Main Angular Files -->
     <script src="assets/js/angular.js"></script>
     <script src="assets/js/angular-route.js"></script>
@@ -17,27 +24,33 @@
     <!-- Angular Config/Routes -->
     <script src="app/app.js"></script>
     <script src="app/routes.js"></script>
-    <script src="app/controllers/userCtrl.js"></script>
 
     <!-- Angular Controllers -->
     <script src="app/controllers/userCtrl.js"></script>
     <script src="app/controllers/mainCtrl.js"></script>
     <script src="app/controllers/emailCtrl.js"></script>
     <script src="app/controllers/managementCtrl.js"></script>
+    <script src="app/controllers/demoApp.js"></script>
+
     <!-- Angular Services -->
     <script src="app/services/userServices.js"></script>
     <script src="app/services/authServices.js"></script>
 
-    <!-- Cascade Style Sheets -->
-    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/animate.css">
+
+
+    <!-- for change color -->
+    <style>
+        body {
+            padding-top: 50px;
+        }
+    </style>
 
     <title>Modify Role App</title>
 
 </head>
 
 <body ng-app="userApp" ng-controller="mainCtrl as main" ng-show="main.loadme" ng-cloak>
+<div themer-switcher>
     <!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top navbar-shrink">
         <div class="container">
@@ -79,6 +92,17 @@
                     <li class="">
                         <a ng-show="main.isLoggedIn" class="page-scroll" href="/profile">Hello {{ main.username }}</a>
                     </li>
+                    <li class="">
+                        <a ng-show="main.isLoggedIn"
+                        <label for="styleSwitcher">Choose a style: </label>
+                        <select id="styleSwitcher">
+                          <option value="normal">Normal</option>
+                          <option value="high-contrast">High Contrast</option>
+                          <option value="dark">Dark</option>
+                        </select>
+                        </a>
+                    </li>
+                    
                 </ul>
             </div>
 
@@ -209,5 +233,6 @@
     <script src="assets/js/jquery-3.1.1.min.js"></script>
     <script src="assets/js/bootstrap.js"></script>
 </body>
+</div>
 
 </html>

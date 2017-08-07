@@ -2,6 +2,51 @@ angular.module('mainController', ['authServices', 'userServices'])
 
 // Controller: mainCtrl is used to handle login and main index functions (stuff that should run on every page)  
 .controller('mainCtrl', function(Auth, $timeout, $location, $rootScope, $window, $interval, User, AuthToken, $scope) {
+    
+    // this is for change theme
+    function addEvent(obj, type, fn) {
+      if (obj.attachEvent) {
+        obj['e' + type + fn] = fn;
+        obj[type + fn] = function() {
+          obj['e' + type + fn](window.event);
+        }
+        obj.attachEvent('on' + type, obj[type + fn]);
+      } else obj.addEventListener(type, fn, false);
+    }
+
+    function trigger(action, el) {
+      if (document.createEvent) {
+        var event = document.createEvent('HTMLEvents');
+        event.initEvent(action, true, false);
+        el.dispatchEvent(event);
+      } else {
+        el.fireEvent('on' + action);
+      }
+    }
+
+    function switchStyles() {
+      var selectedOption = this.options[this.selectedIndex],
+        className = selectedOption.value;
+
+      document.body.className = className;
+      localStorage.setItem("bodyClassName", className);
+    }
+
+    var styleSwitcher = document.getElementById("styleSwitcher");
+    addEvent(styleSwitcher, "change", switchStyles);
+
+    var storedClassName = localStorage.getItem("bodyClassName");
+    if (storedClassName) {
+      for (var i = 0; i < styleSwitcher.options.length; i++) {
+        if (styleSwitcher.options[i].value === storedClassName) {
+          styleSwitcher.selectedIndex = i;
+          trigger("change", styleSwitcher);
+        }
+      }
+    }
+
+    // end of change theme
+
     var app = this;
     app.loadme = false; // Hide main HTML until data is obtained in AngularJS
     if ($window.location.pathname === '/') app.home = true; // Check if user is on home page to show home page div

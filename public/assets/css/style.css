@@ -10,6 +10,56 @@ body {
     font-family: "Roboto Slab", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
+
+/*this is for chagne theme*/
+
+/* Normal styles */
+h1 {
+  text-shadow: 2px 2px gray;
+}
+
+img {
+  float: right;
+  width: 250px;
+  padding-left: 20px;
+}
+
+/* High contrast */
+body.high-contrast {
+  background-color: DarkBlue;
+  color: yellow
+}
+
+body.high-contrast h1 {
+  text-shadow: none;
+}
+
+/* Dark */
+body.dark {
+  background-color: black;
+  color: grey
+}
+
+body.dark h1 {
+  text-shadow: none;
+}
+
+/* Print */
+body.print {
+    background-color: cyan;
+    color: red;
+}
+
+body.print h1 {
+  text-shadow: none;
+}
+
+body.print img {
+  display: none;
+}
+
+/*end of change*/
+
 .text-muted {
     color: #777;
 }
