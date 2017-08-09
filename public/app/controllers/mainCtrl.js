@@ -4,9 +4,9 @@ angular.module('mainController', ['authServices', 'userServices'])
 .controller('mainCtrl', function(Auth, $timeout, $location, $rootScope, $window, $interval, User, AuthToken, $scope) {
     
     // this is for change theme
-    function addEvent(obj, type, fn) {
+    function addEvent(obj, type, fn) {  
       if (obj.attachEvent) {
-        obj['e' + type + fn] = fn;
+        obj['e' + type + fn] = fn;//untuk 'e' + type + fn itu hanya penulisan object saja, biar uniq doang
         obj[type + fn] = function() {
           obj['e' + type + fn](window.event);
         }
@@ -44,7 +44,6 @@ angular.module('mainController', ['authServices', 'userServices'])
         }
       }
     }
-
     // end of change theme
 
     var app = this;
