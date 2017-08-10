@@ -1,43 +1,114 @@
-<!-- Heading -->
-<div class="row text-center">
-    <div class="container">
-        <h2 class="section-heading">User Management</h2>
-        <h3 class="section-subheading text-muted">Hello <strong>{{ main.username }}, </strong>This page allows you to edit, add and delete users.</h3>
+<script >
+    // '.tbl-content' consumed little space for vertical scrollbar, scrollbar width depend on browser/os/platfrom. Here calculate the scollbar width .
+$(window).on("load resize ", function() {
+  var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();
+  $('.tbl-header').css({'padding-right':scrollWidth});
+}).resize();
+</script>
+<style>
+
+h1{
+  margin: 0 0 20px;
+  font-size: 48px;
+  font-weight: 300;
+  text-align: center;
+}
+
+span {
+  font-size: 12px;
+  text-align: center;
+}
+
+table{
+  width:100%;
+  table-layout: fixed;
+}
+.tbl-header{
+  background-color: rgba(255,255,255,0.3);
+ }
+.tbl-content{
+  height:300px;
+  overflow-x:auto;
+  margin-top: 0px;
+  border: 1px solid rgba(255,255,255,0.3);
+}
+th{
+  padding: 20px 15px;
+  text-align: left;
+  font-weight: 500;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+td{
+  padding: 15px;
+  text-align: left;
+  vertical-align:middle;
+  font-weight: 300;
+  font-size: 12px;
+  border-bottom: solid 1px rgba(255,255,255,0.1);
+}
+
+
+/* demo styles */
+
+
+body{
+    background: #e9e9e9;
+    color: #666666;
+    font-family: 'RoboDraft', 'Roboto', sans-serif;
+    font-size: 14px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+section{
+  margin: 50px;
+}
+
+/* for custom scrollbar for webkit browser*/
+
+::-webkit-scrollbar {
+    width: 6px;
+} 
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+} 
+::-webkit-scrollbar-thumb {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+}    
+</style>
+
+<section style="margin-top: -250px">
+    <!--for demo wrap-->
+    <!-- Heading -->
+        <h1 class="section-heading">User Management</h1>
+        <span><h3 class="section-subheading text-muted">Hello <strong>{{ main.username }}, </strong>This page allows you to edit, add and delete users.</h3><span>
+    <!-- Heading -->
+    <!-- Loading Icon (Bootstrap) -->
+    <div class="jumbotron text-center" ng-show="management.loading">
+        <span class="glyphicon glyphicon-repeat spinner"></span>
+        <p>Loading....</p>
     </div>
-</div>
-<!-- Heading -->
-
-<br>
-
-<!-- Loading Icon (Bootstrap) -->
-<div class="jumbotron text-center" ng-show="management.loading">
-    <span class="glyphicon glyphicon-repeat spinner"></span>
-    <p>Loading....</p>
-</div>
-<!-- Loading Icon (Bootstrap) -->
-
-<br>
-
-<!-- Input For Filter  -->
-<div>
-    <div class="col-lg-6">
-        <div class="input-group">
-            <span class="input-group-addon">Results to display:</span>
-            <input type="text" class="form-control" ng-model="number">
-        </div>
-    </div>
-</div>
-
-<!-- Container: Start -->
-<div class="container">
-
-    <!-- Apply Button Filter -->
-    <button type="button" ng-click="management.showMore(number);" class="btn btn-success">Apply Filter</button>
-
-    <!--/ Show All Button -->
-    <button type="button" ng-click="management.showAll();" class="btn btn-warning">Show All</button>
-
+    <!-- Loading Icon (Bootstrap) -->
     <!-- Input For Filter  -->
+    <div>
+        <div class="col-lg-6" style="margin-top: 8px; margin-left: -13px;margin-right: 20px">
+            <div class="input-group">
+                <span class="input-group-addon">Number of Result:</span>
+                <input type="text" class="form-control" ng-model="number" style="width: 100px">
+
+                <!-- this for the button -->
+                <button type="button" ng-click="management.showMore(number);" class="btn btn-success" style="margin-left: -60px">Apply Filter</button>
+                <!--/ Show All Button -->
+                <button type="button" ng-click="management.showAll();" class="btn btn-warning">Show All</button>
+            </div>
+        </div>
+
+        <!-- Input For Filter  -->
+    </div>
+    <!-- Container: Start -->
+    <div class="container">
+    <!-- Apply Button Filter -->
+    
 
     <!-- Simple Search Bar -->
     <div class="navbar-form">
@@ -45,8 +116,8 @@
             <!-- Search Input -->
             <input type="text" class="form-control" name="search" placeholder="search for..." ng-model="searchKeyword">
         </div>
-        <!-- Serach Button -->
-        <button type="button" ng-click="management.search(searchKeyword, number);" class="btn btn-default">Search</button>
+        <!-- Search Button -->
+        <button type="button" ng-click="management.search(searchKeyword, number);" id="btn-pulse" class="btn btn-default pulse-button" >Search</button>
         <!-- Clear Button -->
         <button type="button" ng-click="management.clear();" class="btn btn-default">Clear</button>
         <!-- Advanced Search Button -->
@@ -55,7 +126,6 @@
         </a>
     </div>
     <!-- Simple Search Bar /-->
-
     <!-- Custom Error Message -->
     <div class="row show-hide-message" ng-show="management.showMoreError">
         <div class="alert alert-danger">{{ management.showMoreError }}</div>
@@ -65,35 +135,21 @@
 </div>
 <!-- Container: End -->
 
-<br>
-
-<!-- Total Search Results -->
-<div ng-show="searchFilter !== undefined">
-    <p><strong>Total results: </strong>{{ (management.users | filter: searchFilter).length }}</p>
-</div>
-
-<!-- Results Being Shown -->
-<div ng-show="searchFilter !== undefined">
-    <p><strong>Showing: </strong>{{( management.users | filter: searchFilter | limitTo: management.limit).length }}</p>
-</div>
-
-<br>
-<br>
-<br>
-
-<!-- User Management Table -->
-<div class="panel panel-primary">
-    <!-- Heading -->
-    <div class="panel-heading">
-        <strong>User Management</strong>
-    </div>
-    <!-- Start: Table -->
-    <table class="table">
+  <div class="tbl-header">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <thead>
         <tr>
-            <th>Name</th>
-            <th>Username</th>
-            <th>Email</th>
+          <th>Name</th>
+          <th>Username</th>
+          <th>Email</th>
+          <th>Action</th>
         </tr>
+      </thead>
+    </table>
+  </div>
+  <div class="tbl-content">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <tbody>
         <tr ng-repeat="person in management.users | filter: searchFilter | limitTo: management.limit">
             <td>{{ person.name }}</td>
             <td>{{ person.username }}</td>
@@ -107,69 +163,17 @@
                 <button type="button" ng-click="management.deleteUser(person.username);" ng-show="management.deleteAccess" class="btn btn-danger">Delete</button>
             </td>
         </tr>
-        <!-- End: Table -->
+      </tbody>
     </table>
-</div>
-<!-- User Management Table -->
-
-<br>
-<br>
-
-<!-- Input For Filter  -->
-<div>
-    <div class="col-lg-6">
-        <div class="input-group">
-            <span class="input-group-addon">Results to display:</span>
-            <input type="text" class="form-control" ng-model="number">
-        </div>
+    <!-- Total Search Results -->
+    <div ng-show="searchFilter !== undefined">
+        <p><strong>Total results: </strong>{{ (management.users | filter: searchFilter).length }}</p>
     </div>
-</div>
 
-<!-- Container: Start -->
-<div class="container">
-
-    <!-- Apply Button Filter -->
-    <button type="button" ng-click="management.showMore(number);" class="btn btn-success">Apply Filter</button>
-
-    <!--/ Show All Button -->
-    <button type="button" ng-click="management.showAll();" class="btn btn-warning">Show All</button>
-    <!-- Input For Filter  -->
-
-    <!-- Simple Search Bar -->
-    <div class="navbar-form">
-        <div class="form-group">
-            <!-- Search Input -->
-            <input type="text" class="form-control" name="search" placeholder="search for..." ng-model="searchKeyword">
-        </div>
-        <!-- Serach Button -->
-        <button type="button" ng-click="management.search(searchKeyword, number);" class="btn btn-default">Search</button>
-        <!-- Clear Button -->
-        <button type="button" ng-click="management.clear();" class="btn btn-default">Clear</button>
-        <!-- Advanced Search Button -->
-        <a href="/search">
-            <button type="button" class="btn btn-default">Advanced Search</button>
-        </a>
+    <!-- Results Being Shown -->
+    <div ng-show="searchFilter !== undefined">
+        <p><strong>Showing: </strong>{{( management.users | filter: searchFilter | limitTo: management.limit).length }}</p>
     </div>
-    <!-- Simple Search Bar /-->
-</div>
-<!-- Container: End -->
+  </div>
+</section>
 
-<br>
-
-<!-- Total Search Results -->
-<div ng-show="searchFilter !== undefined">
-    <p><strong>Total results: </strong>{{ (management.users | filter: searchFilter).length }}</p>
-</div>
-
-<!-- Results Being Shown -->
-<div ng-show="searchFilter !== undefined">
-    <p><strong>Showing: </strong>{{( management.users | filter: searchFilter | limitTo: management.limit).length }}</p>
-</div>
-
-<br>
-
-<!-- Custom Error Message -->
-<div class="row show-hide-message" ng-show="management.showMoreError">
-    <div class="alert alert-danger">{{ management.showMoreError }}</div>
-</div>
-<!-- Custom Error Message -->
