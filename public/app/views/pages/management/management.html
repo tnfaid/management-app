@@ -5,6 +5,7 @@ $(window).on("load resize ", function() {
   $('.tbl-header').css({'padding-right':scrollWidth});
 }).resize();
 </script>
+
 <style>
 
 h1{
@@ -13,68 +14,7 @@ h1{
   font-weight: 300;
   text-align: center;
 }
-
-span {
-  font-size: 12px;
-  text-align: center;
-}
-
-table{
-  width:100%;
-  table-layout: fixed;
-}
-.tbl-header{
-  background-color: rgba(255,255,255,0.3);
- }
-.tbl-content{
-  height:300px;
-  overflow-x:auto;
-  margin-top: 0px;
-  border: 1px solid rgba(255,255,255,0.3);
-}
-th{
-  padding: 20px 15px;
-  text-align: left;
-  font-weight: 500;
-  font-size: 12px;
-  text-transform: uppercase;
-}
-td{
-  padding: 15px;
-  text-align: left;
-  vertical-align:middle;
-  font-weight: 300;
-  font-size: 12px;
-  border-bottom: solid 1px rgba(255,255,255,0.1);
-}
-
-
-/* demo styles */
-
-
-body{
-    background: #e9e9e9;
-    color: #666666;
-    font-family: 'RoboDraft', 'Roboto', sans-serif;
-    font-size: 14px;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-section{
-  margin: 50px;
-}
-
-/* for custom scrollbar for webkit browser*/
-
-::-webkit-scrollbar {
-    width: 6px;
-} 
-::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
-} 
-::-webkit-scrollbar-thumb {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
-}    
+    
 </style>
 
 <section style="margin-top: -250px">
@@ -126,11 +66,7 @@ section{
         </a>
     </div>
     <!-- Simple Search Bar /-->
-    <!-- Custom Error Message -->
-    <div class="row show-hide-message" ng-show="management.showMoreError">
-        <div class="alert alert-danger">{{ management.showMoreError }}</div>
-    </div>
-    <!-- Custom Error Message -->
+    
 
 </div>
 <!-- Container: End -->
@@ -150,6 +86,11 @@ section{
   <div class="tbl-content">
     <table cellpadding="0" cellspacing="0" border="0">
       <tbody>
+        <!-- Custom Error Message -->
+        <div class="show-hide-message" ng-show="management.showMoreError" style="width: 1080px">
+            <div class="alert alert-danger">{{ management.showMoreError }}</div>
+        </div>
+        <!-- Custom Error Message -->
         <tr ng-repeat="person in management.users | filter: searchFilter | limitTo: management.limit">
             <td>{{ person.name }}</td>
             <td>{{ person.username }}</td>

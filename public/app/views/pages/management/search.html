@@ -1,3 +1,23 @@
+<script >
+    // '.tbl-content' consumed little space for vertical scrollbar, scrollbar width depend on browser/os/platfrom. Here calculate the scollbar width .
+$(window).on("load resize ", function() {
+  var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();
+  $('.tbl-header').css({'padding-right':scrollWidth});
+}).resize();
+</script>
+
+<style>
+
+h1{
+  margin: 0 0 20px;
+  font-size: 48px;
+  font-weight: 300;
+  text-align: center;
+}
+    
+</style>
+
+
 <!-- Heading -->
 <div class="row text-center">
     <div class="container">
