@@ -72,6 +72,7 @@ h1{
           <th>Name</th>
           <th>Username</th>
           <th>Email</th>
+          <th>Permission</th>
           <th>Action</th>
         </tr>
       </thead>
@@ -95,6 +96,7 @@ h1{
             <td>{{ person.name }}</td>
             <td>{{ person.username }}</td>
             <td>{{ person.email }}</td>
+            <td>{{ person.permission }}</td>
             <td>
                 <!-- Edit Button -->
                 <a href="/edit/{{ person._id }}">
