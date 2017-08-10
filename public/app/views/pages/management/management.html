@@ -23,15 +23,10 @@ h1{
         <h1 class="section-heading">User Management</h1>
         <span><h3 class="section-subheading text-muted">Hello <strong>{{ main.username }}, </strong>This page allows you to edit, add and delete users.</h3><span>
     <!-- Heading -->
-    <!-- Loading Icon (Bootstrap) -->
-    <div class="jumbotron text-center" ng-show="management.loading">
-        <span class="glyphicon glyphicon-repeat spinner"></span>
-        <p>Loading....</p>
-    </div>
-    <!-- Loading Icon (Bootstrap) -->
+    
     <!-- Input For Filter  -->
     <div>
-        <div class="col-lg-6" style="margin-top: 8px; margin-left: -13px;margin-right: 20px">
+        <div class="col-lg-6" style="margin-top: 8px; margin-left: -13px;margin-right: 100px">
             <div class="input-group">
                 <span class="input-group-addon">Number of Result:</span>
                 <input type="text" class="form-control" ng-model="number" style="width: 100px">
@@ -42,7 +37,6 @@ h1{
                 <button type="button" ng-click="management.showAll();" class="btn btn-warning">Show All</button>
             </div>
         </div>
-
         <!-- Input For Filter  -->
     </div>
     <!-- Container: Start -->
@@ -61,9 +55,9 @@ h1{
         <!-- Clear Button -->
         <button type="button" ng-click="management.clear();" class="btn btn-default">Clear</button>
         <!-- Advanced Search Button -->
-        <a href="/search">
+        <!-- <a href="/search">
             <button type="button" class="btn btn-default">Advanced Search</button>
-        </a>
+        </a> -->
     </div>
     <!-- Simple Search Bar /-->
     
@@ -86,6 +80,12 @@ h1{
   <div class="tbl-content">
     <table cellpadding="0" cellspacing="0" border="0">
       <tbody>
+        <!-- Loading Icon (Bootstrap) -->
+        <div class="jumbotron text-center" ng-show="management.loading">
+            <span class="glyphicon glyphicon-repeat spinner"></span>
+            <p>Loading....</p>
+        </div>
+        <!-- Loading Icon (Bootstrap) -->
         <!-- Custom Error Message -->
         <div class="show-hide-message" ng-show="management.showMoreError" style="width: 1080px">
             <div class="alert alert-danger">{{ management.showMoreError }}</div>

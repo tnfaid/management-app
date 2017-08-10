@@ -1168,7 +1168,7 @@ body {
   margin: 0 0 20px;
   padding: 10px 15px;
   box-sizing: border-box;
-  font-wieght: 400;
+  font-weight: 400;
   -webkit-transition: 0.3s ease;
   transition: 0.3s ease;
 }
@@ -1242,7 +1242,7 @@ START: LOADING ICON FOR LOGGING OUT USER
     height: 20px;
     width: 20px;
     border-radius: 20px;
-    background-color: white;
+    /*background-color: white;*/
 }
 
 @keyframes loader {

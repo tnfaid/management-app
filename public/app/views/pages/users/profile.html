@@ -1,37 +1,52 @@
+<script >
+    // '.tbl-content' consumed little space for vertical scrollbar, scrollbar width depend on browser/os/platfrom. Here calculate the scollbar width .
+$(window).on("load resize ", function() {
+  var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();
+  $('.tbl-header').css({'padding-right':scrollWidth});
+}).resize();
+</script>
+
+<style>
+
+h1{
+  margin: 0 0 20px;
+  font-size: 48px;
+  font-weight: 300;
+  text-align: center;
+}
+    
+</style>
+<section style="margin-top: -250px">
 <!-- Heading -->
-<div class="row text-center">
-    <div class="container">
-        <h2 class="section-heading">Profile</h2>
-        <h3 class="section-subheading text-muted">This page allows you to view your user profile.</h3>
-    </div>
-</div>
+        <h1 class="section-heading">Profile</h1>
+        <span><h3 class="section-subheading text-muted">This page allows you to view your user profile.</h3></span>
 <!-- Heading -->
 
-<div class="panel panel-info">
 
     <!-- Default panel contents -->
     <div class="panel-heading" style="text-align: center;"><strong>User Profile</strong></div>
 
     <!-- Table -->
-    <table class="table">
+<div class="tbl-header">
+    <table cellpadding="0" cellspacing="0" border="0">
+        <thead>
         <tr>
             <td><strong>Username</strong></td>
             <td><strong>Email Address</strong></td>
             <td><strong>Password</strong></td>
         </tr>
+        </thead>
+    </table>
+</div>
+<div class="table">
+    <table>
+        <tbody>
         <tr>
             <td>{{ main.username }}</td>
             <td>{{ main.useremail }}</td>
             <td>****************</td>
         </tr>
+        </tbody>
     </table>
 </div>
-
- <div class="switcher" style="left:145px; top: -130px;">
-                    <ul class="colors-list nav-text">
-                        <li><a title="Pink" id="pink" class="pink" ></a></li>
-                        <li><a title="Cyan" id="cyan" class="cyan" ></a></li>
-                        <li><a title="White" id="white" class="white" ></a></li>
-                        <li><a title="Brown" id="brown" class="brown" ></a></li>
-                    </ul>
-                </div> 
+</section>
